@@ -1,0 +1,43 @@
+services:
+  php:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: sf-api-import-php
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+      - ./var/log:/var/www/html/var/log
+      - ./var/cache:/var/www/html/var/cache
+      - ./var/imports:/var/www/html/var/imports
+    environment:
+      - APP_ENV=${APP_ENV:-dev}
+      - APP_SECRET=${APP_SECRET:-change_me}
+      - SALESFORCE_INSTANCE_URL=${SALESFORCE_INSTANCE_URL}
+      - SALESFORCE_CLIENT_ID=${SALESFORCE_CLIENT_ID}
+      - SALESFORCE_CLIENT_SECRET=${SALESFORCE_CLIENT_SECRET}
+      - SALESFORCE_USERNAME=${SALESFORCE_USERNAME}
+      - SALESFORCE_PASSWORD=${SALESFORCE_PASSWORD}
+      - SALESFORCE_SECURITY_TOKEN=${SALESFORCE_SECURITY_TOKEN}
+    networks:
+      - sf-api-network
+
+  apache:
+    image: httpd:2.4
+    container_name: sf-api-import-apache
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+      - ./docker/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./docker/apache/vhost.conf:/usr/local/apache2/conf/extra/vhost.conf
+    networks:
+      - sf-api-network
+
+networks:
+  sf-api-network:
+    driver: bridge
+
+volumes:
+  sf-api-imports:
+    driver: local
