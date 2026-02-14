@@ -8,6 +8,15 @@ framework:
     #esi: true
     #fragments: true
 
+    http_client:
+        scoped_clients:
+            salesforce.client:
+                base_uri: '%env(SALESFORCE_INSTANCE_URL)%'
+                timeout: 300
+                headers:
+                    'Content-Type': 'application/json'
+                    'Accept': 'application/json'
+
 when@test:
     framework:
         test: true

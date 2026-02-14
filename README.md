@@ -30,49 +30,50 @@ make init
 
 ### Docker
 ```bash
-make build          # Construit les images Docker
-make start          # Démarre les conteneurs
-make stop           # Arrête les conteneurs
-make restart        # Redémarre les conteneurs
-make logs           # Affiche les logs des conteneurs
-make shell          # Ouvre un shell dans le conteneur PHP
+make docker-build    # Construit les images Docker
+make docker-up       # Démarre les conteneurs
+make docker-stop     # Arrête les conteneurs
+make docker-restart  # Redémarre les conteneurs
+make docker-logs     # Affiche les logs des conteneurs
+make docker-shell    # Ouvre un shell dans le conteneur PHP
 ```
 
 ### Composer
 ```bash
-make install        # Installe les dépendances
-make update         # Met à jour les dépendances
-make require        # Installe un package (usage: make require package=vendor/package)
+make composer-install                         # Installe les dépendances
+make composer-update                          # Met à jour les dépendances
+make composer-require package=vendor/package  # Installe un package
 ```
 
 ### Symfony
 ```bash
-make clear-cache    # Vide le cache Symfony
+make console-cc      # Vide le cache Symfony
 ```
 
 ### Tests
 ```bash
-make test           # Lance les tests PHPUnit
-make test-coverage  # Lance les tests avec couverture de code
+make test            # Lance les tests PHPUnit
+make test-coverage   # Lance les tests avec couverture de code
 ```
 
 ### Qualité de code
 ```bash
-make analyze        # Analyse le code avec PHPStan
-make fix-cs         # Corrige le code avec PHP-CS-Fixer
-make check-cs       # Vérifie le code avec PHP-CS-Fixer (dry-run)
+make analyze         # Analyse le code avec PHPStan
+make fix-cs          # Corrige le code avec PHP-CS-Fixer
+make check-cs        # Vérifie le code avec PHP-CS-Fixer (dry-run)
 ```
 
 ### Logs
 ```bash
-make logs-sales     # Affiche les logs d'import des ventes
-make logs-symfony   # Affiche les logs Symfony
+make logs-sales      # Affiche les logs d'import des ventes
+make logs-symfony    # Affiche les logs Symfony
 ```
 
 ### Utilitaires
 ```bash
-make permissions    # Corrige les permissions des fichiers
-make init           # Initialisation complète du projet
+make permissions     # Corrige les permissions des fichiers
+make init            # Initialisation complète du projet
+make help            # Affiche toutes les commandes disponibles
 ```
 
 ### Import test
@@ -87,22 +88,22 @@ make test-import file=path/to/file.csv  # Teste l'import avec un fichier CSV
 
 ## Structure du projet
 
-Voir [CLAUDE.md](CLAUDE.md) pour la documentation complète.
+Voir [.claude/CLAUDE.md](.claude/CLAUDE.md) pour la documentation complète.
 
 ## Développement
 
 ```bash
 # Démarrer l'environnement
-make start
+make docker-up
 
 # Installer les dépendances
-make install
+make composer-install
 
 # Ouvrir un shell dans le conteneur
-make shell
+make docker-shell
 
 # Suivre les logs
-make logs
+make docker-logs
 ```
 
 ## Production

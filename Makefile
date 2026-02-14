@@ -1,4 +1,4 @@
-.PHONY: help install start stop restart build logs shell test analyze fix-cs check-cs clear-cache
+.PHONY: help init docker-build docker-up docker-stop docker-restart docker-logs docker-shell composer-install composer-update composer-require console-cc test test-coverage analyze fix-cs check-cs logs-sales logs-symfony permissions test-import
 
 .DEFAULT_GOAL := help
 
@@ -6,37 +6,37 @@ help: ## Affiche cette aide
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
 # Docker
-build: ## Construit les images Docker
+docker-build: ## Construit les images Docker
 	docker-compose build --pull
 
-start: ## Démarre les conteneurs
+docker-up: ## Démarre les conteneurs
 	docker-compose up -d
 
-stop: ## Arrête les conteneurs
+docker-stop: ## Arrête les conteneurs
 	docker-compose down
 
-restart: ## Redémarre les conteneurs
-	$(MAKE) stop
-	$(MAKE) start
+docker-restart: ## Redémarre les conteneurs
+	$(MAKE) docker-stop
+	$(MAKE) docker-up
 
-logs: ## Affiche les logs des conteneurs
+docker-logs: ## Affiche les logs des conteneurs
 	docker-compose logs -f
 
-shell: ## Ouvre un shell dans le conteneur PHP
+docker-shell: ## Ouvre un shell dans le conteneur PHP
 	docker-compose exec php bash
 
 # Composer
-install: ## Installe les dépendances Composer
+composer-install: ## Installe les dépendances Composer
 	docker-compose exec php composer install
 
-update: ## Met à jour les dépendances Composer
+composer-update: ## Met à jour les dépendances Composer
 	docker-compose exec php composer update
 
-require: ## Installe un package (usage: make require package=vendor/package)
+composer-require: ## Installe un package (usage: make composer-require package=vendor/package)
 	docker-compose exec php composer require $(package)
 
 # Symfony
-clear-cache: ## Vide le cache Symfony
+console-cc: ## Vide le cache Symfony
 	docker-compose exec php php bin/console cache:clear
 
 # Tests
@@ -68,7 +68,7 @@ permissions: ## Corrige les permissions des fichiers
 	docker-compose exec php chown -R www-data:www-data var/
 	docker-compose exec php chmod -R 775 var/
 
-init: build start install permissions ## Initialisation complète du projet
+init: docker-build docker-up composer-install permissions ## Initialisation complète du projet
 
 # Import test
 test-import: ## Teste l'import avec un fichier CSV (usage: make test-import file=path/to/file.csv)

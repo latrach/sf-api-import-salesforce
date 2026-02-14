@@ -1,0 +1,4 @@
+partner_name,customer_email,product_name,warranty_code,warranty_label,warranty_start_date,warranty_end_date,product_purchase_price,warranty_purchase_date,invoice_number,purchase_date,customer_address_street,customer_address_city,customer_address_zipcode,customer_address_country
+Fnac,jean.dupont@email.com,iPhone 15 Pro,EXT2Y,Extension Garantie 2 ans,2024-01-15,2026-01-15,1199.99,2024-01-15,INV-2024-001,2024-01-15,12 rue de la Paix,Paris,75002,France
+Darty,marie.martin@email.com,MacBook Air M3,APPC3Y,AppleCare+ 3 ans,2024-02-01,2027-02-01,1499.00,2024-02-01,INV-2024-002,2024-02-01,45 avenue des Champs,Lyon,69001,France
+Boulanger,pierre.dubois@email.com,Samsung Galaxy S24,EXTPLUS,Extension Garantie Plus,2024-02-10,2027-02-10,899.99,2024-02-10,INV-2024-003,2024-02-10,78 boulevard Haussmann,Paris,75008,France

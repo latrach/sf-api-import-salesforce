@@ -7,7 +7,7 @@ Le projet **SF API Import Salesforce** a été initialisé avec succès !
 ### ✅ Éléments installés
 
 - **Docker** : Conteneurs PHP 8.2-fpm + Apache 2.4 opérationnels
-- **Symfony 7.2** : Framework installé et fonctionnel
+- **Symfony 7.4** : Framework installé et fonctionnel
 - **Composer** : Gestionnaire de dépendances configuré
 - **Packages Symfony** :
   - symfony/http-client (pour appels Salesforce API)
@@ -74,7 +74,7 @@ Suivre l'architecture définie dans `CLAUDE.md` :
 
 ```bash
 # Créer le controller d'import
-make shell
+make docker-shell
 php bin/console make:controller Api/SalesImportController
 
 # Créer les services
@@ -88,9 +88,9 @@ php bin/console make:controller Api/SalesImportController
 # - SalesforceQueryService
 ```
 
-### 3. Configurer Monolog
+### 3. Configuration Monolog
 
-Éditer `config/packages/monolog.yaml` pour ajouter le canal `sales_import` avec rotation 90 jours.
+✅ **Déjà configuré** : Le canal `sales_import` avec rotation 90 jours est déjà configuré dans `config/packages/monolog.yaml`.
 
 ### 4. Tester
 
@@ -102,22 +102,25 @@ make test-import file=tests/fixtures/sample_sales.csv
 ## Commandes utiles
 
 ```bash
-make start              # Démarrer l'environnement
-make stop               # Arrêter l'environnement
-make logs               # Afficher les logs
-make shell              # Ouvrir un shell dans le conteneur PHP
+make docker-up          # Démarrer l'environnement
+make docker-stop        # Arrêter l'environnement
+make docker-logs        # Afficher les logs
+make docker-shell       # Ouvrir un shell dans le conteneur PHP
+make composer-install   # Installer les dépendances
+make console-cc         # Vider le cache Symfony
 make test               # Lancer les tests
 make analyze            # Analyser le code
+make help               # Afficher toutes les commandes
 ```
 
 ## Documentation
 
-- **[CLAUDE.md](CLAUDE.md)** : Documentation complète du projet
+- **[.claude/CLAUDE.md](.claude/CLAUDE.md)** : Documentation complète du projet
 - **[README.md](README.md)** : Guide d'installation et utilisation
 
 ## Support
 
 Pour toute question, consulter :
-1. [CLAUDE.md](CLAUDE.md) - Architecture et conventions
+1. [.claude/CLAUDE.md](.claude/CLAUDE.md) - Architecture et conventions
 2. `make help` - Liste des commandes disponibles
 3. Logs : `make logs-symfony` ou `make logs-sales`
