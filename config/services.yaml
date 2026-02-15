@@ -23,17 +23,16 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    # Binding du client HTTP Salesforce
+    # Binding du client HTTP Salesforce avec JWT Bearer Flow
     App\Service\Salesforce\SalesforceAuthService:
         arguments:
             $salesforceClient: '@salesforce.client'
             $salesLogger: '@monolog.logger.sales_import'
             $instanceUrl: '%env(SALESFORCE_INSTANCE_URL)%'
             $clientId: '%env(SALESFORCE_CLIENT_ID)%'
-            $clientSecret: '%env(SALESFORCE_CLIENT_SECRET)%'
             $username: '%env(SALESFORCE_USERNAME)%'
-            $password: '%env(SALESFORCE_PASSWORD)%'
-            $securityToken: '%env(SALESFORCE_SECURITY_TOKEN)%'
+            $privateKeyPath: '%env(SALESFORCE_PRIVATE_KEY_PATH)%'
+            $audienceUrl: '%env(SALESFORCE_AUDIENCE_URL)%'
 
     App\Service\Salesforce\SalesforceBulkService:
         arguments:

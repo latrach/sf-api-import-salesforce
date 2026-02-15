@@ -44,3 +44,8 @@ Thumbs.db
 # Logs
 /var/log/*.log
 !/var/log/.gitkeep
+
+# Salesforce JWT Keys (NEVER commit private keys!)
+*_private_key.pem
+salesforce_private_key.pem
+*.pem
