@@ -1,6 +1,6 @@
 # SF API Import Salesforce
 
-API Symfony pour l'import des ventes d'extensions de garanties partenaires dans Salesforce via Bulk API 2.0.
+API Symfony pour l'import des ventes à partir d'un fichier CSV dans Salesforce via Bulk API 2.0.
 
 ## Prérequis
 
@@ -85,10 +85,6 @@ make test-import file=path/to/file.csv  # Teste l'import avec un fichier CSV
 
 - **API** : http://localhost:8000
 - **Endpoint import** : POST http://localhost:8000/api/salesforce/import-sales
-
-## Structure du projet
-
-Voir [.claude/CLAUDE.md](.claude/CLAUDE.md) pour la documentation complète.
 
 ## Développement
 
