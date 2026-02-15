@@ -31,11 +31,16 @@ when@test:
                 action_level: error
                 handler: nested
                 excluded_http_codes: [404, 405]
-                channels: ["!event"]
+                channels: ["!event", "!sales_import"]
             nested:
                 type: stream
                 path: "%kernel.logs_dir%/%kernel.environment%.log"
                 level: debug
+            sales_import:
+                type: stream
+                path: "%kernel.logs_dir%/sales_import.log"
+                level: debug
+                channels: [sales_import]
 
 when@prod:
     monolog:

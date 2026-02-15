@@ -22,3 +22,52 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # Binding du client HTTP Salesforce
+    App\Service\Salesforce\SalesforceAuthService:
+        arguments:
+            $salesforceClient: '@salesforce.client'
+            $salesLogger: '@monolog.logger.sales_import'
+            $instanceUrl: '%env(SALESFORCE_INSTANCE_URL)%'
+            $clientId: '%env(SALESFORCE_CLIENT_ID)%'
+            $clientSecret: '%env(SALESFORCE_CLIENT_SECRET)%'
+            $username: '%env(SALESFORCE_USERNAME)%'
+            $password: '%env(SALESFORCE_PASSWORD)%'
+            $securityToken: '%env(SALESFORCE_SECURITY_TOKEN)%'
+
+    App\Service\Salesforce\SalesforceBulkService:
+        arguments:
+            $salesforceClient: '@salesforce.client'
+            $salesLogger: '@monolog.logger.sales_import'
+
+    App\Service\Salesforce\SalesforceQueryService:
+        arguments:
+            $salesforceClient: '@salesforce.client'
+            $salesLogger: '@monolog.logger.sales_import'
+
+    # Services Sales avec logger dédié
+    App\Service\Sales\CsvParserService:
+        arguments:
+            $salesLogger: '@monolog.logger.sales_import'
+
+    App\Service\Sales\SalesValidatorService:
+        arguments:
+            $salesLogger: '@monolog.logger.sales_import'
+
+    App\Service\Sales\PartnerReconciliationService:
+        arguments:
+            $salesLogger: '@monolog.logger.sales_import'
+
+    App\Service\Sales\SalesTransformerService:
+        arguments:
+            $salesLogger: '@monolog.logger.sales_import'
+
+    App\Service\Sales\SalesImportService:
+        arguments:
+            $salesLogger: '@monolog.logger.sales_import'
+            $projectDir: '%kernel.project_dir%'
+
+    # Controller avec logger sales
+    App\Controller\Api\SalesImportController:
+        arguments:
+            $salesLogger: '@monolog.logger.sales_import'
